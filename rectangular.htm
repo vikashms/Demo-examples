@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <title>Demo</title>
+    <script src="common/jquery/js/jquery-1.7.1.min.js"></script>
+    <script src="common/vendor/highcharts/highcharts.js"></script>
+    <style type="text/css">
+        .label-container {
+            position: relative;
+            top: -48px;
+            left: 61px;
+            width: 400px;
+        }
+        #exapmle-paper-js {
+            width: 397px;
+            height: 373px;
+        }
+        .x-label-holder {
+            margin-left: 8px;
+        }
+    </style>
+</head>
+
+<body>
+    <div id="exapmle-paper-js">
+       
+    </div>
+    <script type="text/javascript">
+        $(function () {
+            $('#exapmle-paper-js').highcharts({
+                chart: {
+                    zoomType: 'xy'
+                    
+                },
+                xAxis: {
+                    min: 0,
+                    max: 11000,
+                    tickInterval: 1000,
+                    title: {
+                        text: null
+                    },
+                    labels: {
+                        //                    enabled: false,
+                        color: '#fff',
+
+                        x: 5,
+                        useHTML: true,
+                        formatter: function () {
+                            var strHtml = this.value/1000;
+                            return strHtml;
+                        }
+
+                    }
+                },
+                yAxis: {
+                    min: 0,
+                    max: 170,
+                    tickInterval: 10
+                },
+
+                series: [{
+                    data: [[0, 0], [0, 20], [0, 40], [0, 50], [0, 60], [0, 70], [0, 80], [0, 90], [0, 100], [0, 110], [1, 120], [10000, 160]]
+                }]
+            });
+        });
+    </script>
+
+</body>
+</html>
