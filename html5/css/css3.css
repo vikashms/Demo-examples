@@ -1,0 +1,28 @@
+﻿.svg-polygon {
+                fill:lime;
+                stroke:purple;
+                stroke-width:5;
+                fill-rule:evenodd;
+            }
+
+.chry-img 
+{
+    position:absolute;
+    left:0px;
+    width:100px;
+    height:100px;
+    animation:myfirst 5s;
+    -webkit-animation:myfirst 5s; /* Safari and Chrome */
+}
+
+@keyframes myfirst
+{
+from {left:0px;}
+to {left:20px;}
+}
+
+@-webkit-keyframes myfirst /* Safari and Chrome */
+{
+from {left:0px;}
+to {left:20px;}
+}
