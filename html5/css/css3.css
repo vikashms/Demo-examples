@@ -8,21 +8,25 @@
 .chry-img 
 {
     position:absolute;
-    left:0px;
+    left:100px;
+    top:100px;
     width:100px;
     height:100px;
-    animation:myfirst 5s;
-    -webkit-animation:myfirst 5s; /* Safari and Chrome */
+    animation:myfirst 5s infinite;
+    -webkit-animation:myfirst 5s infinite; /* Safari and Chrome */
+    animation-direction:alternate;
+    
+-webkit-animation-fill-mode:backwards;
 }
 
 @keyframes myfirst
 {
-from {left:0px;}
-to {left:20px;}
+from {-webkit-transform:rotate(0deg);}
+to {-webkit-transform:rotate(360deg);}
 }
 
 @-webkit-keyframes myfirst /* Safari and Chrome */
 {
-from {left:0px;}
-to {left:20px;}
+from {left:100px;}
+to {left:500px;}
 }
