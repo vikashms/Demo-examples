@@ -4,17 +4,22 @@
 <head>
     <title style="color:red">Angular-js</title>
     <script type="text/javascript">
+
     </script>
     <link href="common/bootstrap/css/bootstrap.css" rel="stylesheet" />
+    <script src="common/underscore/underscore.js"></script>
+    <script src="common/backbone/backbone.js"></script>
     <script src="common/angular/angular.js"></script>
     <link href="angular-examples/css/angular-example.css" rel="stylesheet" />
+    <script src="angular-examples/js/views/login-form.js"></script>
 </head>
 
 <body>
-<div ng-controller="Controller">
+<div id="leave-tracker-login-form" ng-controller="Controller">
     <form novalidate class="simple-form">
         Name: <input type="text" ng-blur="blur($event,user)" ng-model="user.name" /><br />
         E-mail: <input type="email" ng-model="user.email" /><br />
+        Password: <input type="password" class="login-password" ng-blur="blurPassword($event,user)" ng-model="user.password" /><br />
         Gender: <input type="radio" ng-model="user.gender" value="male" />male
         <input type="radio" ng-model="user.gender" value="female" />female<br />
         <button ng-click="reset()">RESET</button>
@@ -27,6 +32,12 @@
 <script>
     function Controller($scope) {
         $scope.master = {};
+        debugger;
+       // $scope.loginView = new LoginView();
+        $scope.blurPassword = function (event, user) {
+            
+            
+        };
         $scope.blur = function (event,user) {
         };
         $scope.update = function (user) {
