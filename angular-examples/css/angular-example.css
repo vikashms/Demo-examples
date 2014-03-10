@@ -1,6 +1,6 @@
 ﻿button {
     margin-top:10px;
 }
-.invalid {
+.login-password.invalid {
     border-color:red;
 }

@@ -6,6 +6,7 @@
     <script type="text/javascript">
 
     </script>
+    <script src="common/jquery/js/jquery-1.7.1.min.js"></script>
     <link href="common/bootstrap/css/bootstrap.css" rel="stylesheet" />
     <script src="common/underscore/underscore.js"></script>
     <script src="common/backbone/backbone.js"></script>
@@ -30,10 +31,11 @@
 </div>
  
 <script>
+
     function Controller($scope) {
         $scope.master = {};
-        debugger;
-       // $scope.loginView = new LoginView();
+        $scope.loginView =  new LoginView();
+         // $scope.loginView = new LoginView();
         $scope.blurPassword = function (event, user) {
             
             
