@@ -10,11 +10,7 @@
     <script src="common/backbone/backbone.js"></script>
     <link href="common/bootstrap/css/bootstrap.css" rel="stylesheet" />
     <script src="common/bootstrap/js/bootstrap.js"></script>
-    <script src="backbone-examples/initialize.js"></script>
-    <script src="backbone-examples/js/backbone-example-model.js"></script>
-    <script src="backbone-examples/js/backbone-example-view.js"></script>
     <script src="common/paper/paper.js"></script>
-    <script src="common/vendor/highcharts/highcharts.js"></script>
     <style type="text/css">
         .label-container {
             position: relative;
@@ -43,7 +39,7 @@
         function rectangle() {
             var size = Math.floor(Math.random() * 100) + 20;
             var x = Math.floor(Math.random() * 200) + 30,
-                y = Math.floor(Math.random() * 200) + 1;
+                y = Math.floor(Math.random() * 400) + 1;
             var rectangle = new Path.Rectangle({
                 point: [x, y],
                 size: [size, size]
@@ -51,54 +47,55 @@
             rectangle.fillColor = getRandomColor();
         }
         function Circle() {
-            var size = Math.floor(Math.random() * 40) + 10,
-                x = Math.floor(Math.random() * 1000) + 30,
-                y = Math.floor(Math.random() * 500) + 1;
-            var rectangle = new Path.Circle({
-                center: [x, y],
-                radius: size,
-                strokeColor: getRandomColor(),
-                fillColor: getRandomColor()
-            });
+            
         }
     </script>
-  <!-- <script type="text/paperscript" canvas="paperCanvas" id="paperscope-2">
+   <script type="text/paperscript" canvas="paperCanvas" id="paperscope-2">
         var counter = 0,
-            startSign = false;
+            startSign = false,
+       scroll = {
+            x:0,
+            y:0
+       };
        var path = new Path({
             strokeColor:'black',
             strokeWidth:4
        });
        function onMouseUp(event) {
-            startSign = false;
-              // Circle();
-              //  counter ++;
+            console.log(event.point);
+            if (IsDrag == true) {
+                var deltax = startPoint.x - event.point.x;
+                var deltay = startPoint.y - event.point.y;
+                scroll.x += deltax;
+                scroll.y += deltay;
+                paper.view.scrollBy(deltax, deltay);
+                console.log(deltax)
+                // reset
+                IsDrag = false;
+                window.document.body.style.cursor = 'default';
+            }
+
+        }
+        function onMouseDrag(event) {
+            
+            if (event.tool._count == 1) {
+       console.log(event.point);           
+               window.document.body.style.cursor = 'pointer';                
+               IsDrag = true;
+            }
         }
         function onMouseDown(event) {
-            startSign = true;
-           path = new Path({
-                strokeColor:getRandomColor(),
-                strokeWidth:4
-           });
-              // Circle();
-              //  counter ++;
-        }
-        function onMouseMove(event) {
-               if(startSign === true){
-                    var coord =  event.tool._lastPoint,
-                    point = new Point(coord.x,coord.y);
-                    path.add(point);
-               }
+               startPoint = event.point;
              //   Circle();
               //  counter ++;
         }
-        function onFrame(event) {
-                // On each frame, rotate the path by 3 degrees:
+       function onFrame(event) {
+             /*   // On each frame, rotate the path by 3 degrees:
                 var x = Math.floor(Math.random() * 200) + 30,
                     y = Math.floor(Math.random() * 200) + 1;
                 
                 //path.translate(x, y);
-                for (var i = 0; i < counter; i++) {
+                /////for (var i = 0; i < counter; i++) {
                     
                     var item = project.activeLayer.children[i],
                         rotate = Math.floor(Math.random() * 10) + 1;
@@ -107,25 +104,34 @@
                     item.rotate(rotate);
                     if (item.bounds.left > view.size.width) {
                         item.position.x = -item.bounds.width;
-                    }
-                }
+                   //// }
+               //// }*/
              }
-   </script>-->
+   </script>
     <script type="text/javascript">
 
 
         var onPageLoad = function () {
-            //  var model = new Training.Backbone.ExampleModel();
-            // var view = new Training.Backbone.ExampleView({ model: model });
-
-            // Only executed our code once the DOM is ready.
-
+            
             // Get a reference to the canvas object
-            // var canvas = $('#paperCanvas')[0];
+             var canvas = $('#paperCanvas')[0];
             // Create an empty project and a view for the canvas:
-            //  paper.setup('paperCanvas');
+             paper.setup('paperCanvas');
+             rectangle();
+             rectangle();
+             rectangle();
+             rectangle();
 
-
+        }
+        var zoomIn = function (event) {
+            paper.view.zoom = paper.view.zoom + 0.25;
+        }
+        var zoomReset = function (event) {
+            
+            paper.view.scrollBy(scroll.x, scroll.y);
+            paper.view.zoom = 1;
+            scroll.x = 0;
+            scroll.y = 0;
         }
     </script>
     <script type="text/javascript">
@@ -134,96 +140,8 @@
 </head>
 
 <body onload="onPageLoad()">
-    <div id="backbone-example-holder">
-        <div class="form-holder">
-            <div>
-                <label>Task:</label>
-                <textarea class="input-task"></textarea>
-            </div>
-            
-            <div>
-                <label>Date:</label>
-                <input class="task-date" type="date" name="taskDate" value="2014-02-10">
-            </div>
-        </div>
-        <button class="btn btn-primary btn-add-task">Add Task</button>
-    </div>
-    <div id="exapmle-paper-js">
-       
-    </div>
-    <!--<div class="label-container">
-        <div class="x-label-holder"><span>10</span><sup>-2</sup></div>
-        <div class="x-label-holder"><span>10</span><sup>-3</sup></div>
-        <div class="x-label-holder"><span>10</span><sup>-4</sup></div> 
-        <div class="x-label-holder"><span>10</span><sup>-2</sup></div>
-        <div class="x-label-holder"><span>10</span><sup>-3</sup></div>
-        <div class="x-label-holder"><span>10</span><sup>-4</sup></div> 
-        <div class="x-label-holder"><span>10</span><sup>-2</sup></div>
-        <div class="x-label-holder"><span>10</span><sup>-3</sup></div>
-        <div class="x-label-holder"><span>10</span><sup>-4</sup></div> 
-
-    </div>-->
-    <script type="text/javascript">
-        $(function () {
-            $('#exapmle-paper-js').highcharts({
-                chart: {
-                    zoomType: 'x',
-                },
-                xAxis: {
-                    min: -14,
-                    max: 6,
-                    tickInterval: 2,
-                    title: {
-                        text: null
-                    },
-                    labels: {
-                        //                    enabled: false,
-                        color: '#fff',
-
-                        x: 5,
-                        useHTML: true,
-                        formatter: function () {
-                            var strHtml = null;
-                            if (this.value === -14 || this.value === 6) {
-                                strHtml = ''
-                            }
-                            else if (this.value === 0) {
-                                strHtml = 1;
-                            }
-                            else {
-                                strHtml = '<span>10</span><sup>' + this.value + '</sup>';
-                            }
-                            return strHtml;
-                        }
-
-                    }
-                },
-                yAxis: {
-                    min: 0,
-                    max: 170,
-                    tickInterval: 10
-                },
-
-                series: [{
-                    data: [[-12, 0], [-10, 20], [-8, 40], [-7, 50], [-6, 60], [-5, 70], [-4, 80], [-3, 90], [-2, 100], [-1, 110], [0, 120], [4, 160]]
-                }],
-                plotOptions: {
-                    series: {
-                        dataLabels: {
-                            enabled: true,
-                            formatter: function () {
-                                var e = this.series.xAxis.getExtremes();
-
-                                if (e.max - e.min < 6) {
-                                }
-                                    
-                            }
-                        }
-                    }
-                }
-            });
-        });
-    </script>
-
+    <canvas id="paperCanvas" height="500" width="1000"></canvas>
+    <button onclick="zoomIn()">Zoom IN</button>
+    <button onclick="zoomReset()">Zoom Reset</button>
 </body>
 </html>
