@@ -4,6 +4,7 @@
     <title>Demo</title>
     <script type="text/javascript">
         var Training = {};
+        ScrollBy = [];
     </script>
     <script src="common/jquery/js/jquery-1.7.1.min.js"></script>
     <script src="common/underscore/underscore.js"></script>
@@ -54,8 +55,8 @@
         var counter = 0,
             startSign = false,
        scroll = {
-            x:0,
-            y:0
+            x:paper.view.center._x,
+            y:paper.view.center._y
        };
        var path = new Path({
             strokeColor:'black',
@@ -66,8 +67,6 @@
             if (IsDrag == true) {
                 var deltax = startPoint.x - event.point.x;
                 var deltay = startPoint.y - event.point.y;
-                scroll.x += deltax;
-                scroll.y += deltay;
                 paper.view.scrollBy(deltax, deltay);
                 console.log(deltax)
                 // reset
@@ -127,11 +126,12 @@
             paper.view.zoom = paper.view.zoom + 0.25;
         }
         var zoomReset = function (event) {
-            
-            paper.view.scrollBy(scroll.x, scroll.y);
+            var x = paper.view.center._x - scroll.x,
+                y = paper.view.center._y - scroll.y;
+                paper.view.scrollBy(x,y);
+           
             paper.view.zoom = 1;
-            scroll.x = 0;
-            scroll.y = 0;
+            scrollBy = [];
         }
     </script>
     <script type="text/javascript">
