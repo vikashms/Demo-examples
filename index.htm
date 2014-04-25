@@ -15,16 +15,34 @@
     <script src="backbone-examples/js/backbone-example-view.js"></script>
     <script src="common/paper/paper.js"></script>
     <script src="common/vendor/highcharts/highcharts.js"></script>
-  
+    <link href="html5/css/css3.css" rel="stylesheet" />
+    <script src="router/backbone-router.js"></script>
+    <script type="text/javascript">
+        onload = function () {
+            var route = new Training.Backbone.Router();
+            Backbone.history.start({ pushState: true });
+            var view = new Training.Backbone.ExampleView({
+                model: new Training.Backbone.ExampleModel(),
+                router: route
+            });
+        }
+    </script>
 </head>
 
-<body>
+<body onload="onload">
     <h1>Demo</h1>
-    <ol>
-        <li>
-            <a href="html5/css3.htm">CSS3</a>
-        </li>
-    </ol>
+    <div id="css3-link-container">
+        <ol>
+            <li>
+                <a class="animate">Animate</a>
+            </li>
+            <li>
+                <a class="boxShadow">Box Shadow</a>
+            </li>
+        </ol>
+    </div>
+    <div id="css3-container">
 
+    </div>
 </body>
 </html>

@@ -1,4 +1,17 @@
-﻿.svg-polygon {
+﻿#css3-link-container{
+    float:left;
+    border:1px solid black;
+    height:100%;
+    padding: 10px;
+}
+#css3-container{
+    float:left;
+    width:600px;
+    border:1px solid black;
+    height:100%;
+}
+
+.svg-polygon {
                 fill:lime;
                 stroke:purple;
                 stroke-width:5;
