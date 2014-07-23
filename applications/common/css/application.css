@@ -1,0 +1,25 @@
+﻿@media only screen and (min-device-width : 800px) {
+    .page-container {
+        width:800px;
+        border:2px dotted red;
+    }
+}
+@media only screen and (min-device-width :700px) and (max-device-width : 800px){
+    .page-container {
+        border:1px solid green;
+    }
+}
+.page-container{
+    height:500px;
+    margin-left:auto;
+    margin-right:auto;
+}
+.page-container *{
+    color:red;
+}
+.page-container > div{
+    color:green;
+}
+.div1 + .div2{
+    color:blue;
+}
