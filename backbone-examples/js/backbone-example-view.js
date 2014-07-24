@@ -5,12 +5,7 @@
             'click .show-task': 'showTasks',
         },
         initialize: function (options) {
-          //  this.router = options.router;
-            var model = this.model;
-           // model.on('change:task', this._addTableRow, model.get('task'));
-            //this.on('updateTaskContent', function (strTask) {
-            //    model.set('task', strTask);
-            //});
+          var model = this.model;
         },
         render: function () {
         },
@@ -24,13 +19,15 @@
         showTasks:function(){
             var $showTaskContainer = this.$('#show-task-container'),
                 tasks = this.model.get('tasks'),
-                taskList = tasks.models;
+                taskList = tasks.models,
+                length = taskList.length;
             $showTaskContainer.empty();
-            for (var i = 0; i < taskList.length; i++) {
-                var $div = $("<div></div>"),
-                    curModel =taskList[i]; 
-                $div.text(curModel.get('task'));
-                $showTaskContainer.append($div);
+            for (var i = 0; i < length; i++) {
+                var curModel = taskList[i];
+                var $view = new Training.Backbone.TaskView({
+                    model: curModel
+                })
+                $showTaskContainer.append($view.render().el);
             }
         }
     });
