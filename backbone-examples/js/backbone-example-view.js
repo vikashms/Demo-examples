@@ -1,38 +1,37 @@
 ﻿(function () {
     Training.Backbone.ExampleView = Backbone.View.extend({
-        el: '#css3-link-container',
         events: {
-            'click .animate': 'loadAnimate',
-            'click .boxShadow': 'loadUser',
-            'click .btn-add-task': 'addTask',
-            'blur .input-task': '_updateTask'
+            'click .add-task': 'addTask',
+            'click .show-task': 'showTasks',
         },
         initialize: function (options) {
-            this.router = options.router;
+          //  this.router = options.router;
             var model = this.model;
-            model.on('change:task', this._addTableRow, model.get('task'));
-            this.on('updateTaskContent', function (strTask) {
-                model.set('task', strTask);
-            });
+           // model.on('change:task', this._addTableRow, model.get('task'));
+            //this.on('updateTaskContent', function (strTask) {
+            //    model.set('task', strTask);
+            //});
         },
         render: function () {
         },
         addTask: function () {
-            var model = this.model;
-            console.log(model.get('task'));
-            model.set('date', this.$('.task-date').val());
+            var model = this.model,
+                $inpTask = this.$('.txt-task'),
+                strTask = $inpTask.val();
+            model.addTask(strTask);
+            $inpTask.val('');
         },
-        _updateTask: function (event) {
-            this.trigger('updateTaskContent', $(event.target).val());
-        },
-        _addTableRow: function (task) {
-            console.log(task)
-        },
-        loadAnimate: function (event) {
-            this.router.navigate('#animate', { trigger: true });
-        },
-        loadUser: function (event) {
-            this.router.navigate('#user/vikash/12', { trigger: true,replace:true });
+        showTasks:function(){
+            var $showTaskContainer = this.$('#show-task-container'),
+                tasks = this.model.get('tasks'),
+                taskList = tasks.models;
+            $showTaskContainer.empty();
+            for (var i = 0; i < taskList.length; i++) {
+                var $div = $("<div></div>"),
+                    curModel =taskList[i]; 
+                $div.text(curModel.get('task'));
+                $showTaskContainer.append($div);
+            }
         }
     });
 })();
