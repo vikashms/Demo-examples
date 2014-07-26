@@ -3,27 +3,35 @@
 <head>
     <title>Demo</title>
     <script type="text/javascript">
-        var Training = {};
+        var Training = {},
+            App = {};
     </script>
     <script src="common/jquery/js/jquery-1.7.1.min.js"></script>
     <script src="common/underscore/underscore.js"></script>
     <script src="common/backbone/backbone.js"></script>
     <link href="common/bootstrap/css/bootstrap.css" rel="stylesheet" />
     <script src="common/bootstrap/js/bootstrap.js"></script>
-    <script src="backbone-examples/initialize.js"></script>
-    <script src="backbone-examples/js/backbone-example-model.js"></script>
-    <script src="backbone-examples/js/backbone-example-view.js"></script>
-    <script src="common/paper/paper.js"></script>
-    <script src="common/vendor/highcharts/highcharts.js"></script>
-    <link href="html5/css/css3.css" rel="stylesheet" />
-    <script src="backbone-examples/js/task-model.js"></script>
-    <script src="backbone-examples/js/backbone-collection.js"></script>
-    <script src="backbone-examples/js/task-view.js"></script>
+    <script src="common/vendor/handlebars/handlebars.js"></script>
+    <link href="applications/calendar/css/calendar.css" rel="stylesheet" />
+    <script src="applications/calendar/initialize.js"></script>
+    <script src="applications/calendar/js/models/calendar-model.js"></script>
+    <script src="applications/calendar/js/views/calendar-view.js"></script>
+    <script src="applications/calendar/js/models/calendar.js"></script>
+    <script src="applications/calendar/js/views/calendar.js"></script>
+    <script src="applications/calendar/js/models/task.js"></script>
+    <script src="applications/calendar/js/models/backbone-collection.js"></script>
+    <script src="applications/calendar/js/views/task.js"></script>
+    <script src="applications/calendar/js/models/day.js"></script>
+    <script src="applications/calendar/js/models/days.js"></script>
+    <script src="applications/calendar/js/models/month.js"></script>
+    <script src="applications/calendar/js/models/months.js"></script>
+    <script src="applications/calendar/js/models/year.js"></script>
+    <script src="applications/calendar/js/models/years.js"></script>
     <script type="text/javascript">
         onload = function () {
-            var view = new Training.Backbone.ExampleView({
+            var view = new App.Calendar.Views.Calendar({
                     el: '#css3-link-container',
-                    model: new Training.Backbone.ExampleModel()
+                    model: new App.Calendar.Models.Calendar()
             });
         }
     </script>
@@ -31,12 +39,17 @@
 
 <body onload="onload">
     <h1>Demo</h1>
-    <div id="css3-link-container">
-        <input class="txt-task" type="text" />
-        <div class="btn btn-primary add-task">Add task</div>
-        <div class="btn btn-primary show-task">Show All Task</div>
-        <div id="show-task-container">
+    <div id="css3-link-container" class="calendar">
+        <div class="calendar-header">
+            <div class="btn btn-primary next-month">Next</div>
+            <div class="selected-month-label">
+                <label class="month-name"></label>
+                <span>,</span>
+                <label class="year-name"></label>
+            </div>
+            <div class="btn btn-primary previous-month">Previous</div>
         </div>
+    </div>
     </div>
     
 </body>
